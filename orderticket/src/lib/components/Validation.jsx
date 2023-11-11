@@ -1,7 +1,6 @@
 import React from "react";
-
 export const special = (value) => {
-  if (value.includes("@") && value.includes("#")) return true;
+  if (value.includes("@") || value.includes("#")) return true;
   return false;
 };
 export const uppercase = (value) => {

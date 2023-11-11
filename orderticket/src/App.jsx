@@ -1,21 +1,36 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
-import Login from "./authentication/login/Login";
-import { useState } from "react";
-import Signup from "./authentication/signup/Signup";
-
+import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
+import { publicRoutes } from "./routes";
+import HomePage from "./authentication/hompage/HomePage";
+import { Fragment } from "react";
 function App() {
   return (
-    // <Input
-    //   onChange={(e) => console.log(e.target.value)}
-    //   value={a}
-    //   type={"text"}
-    //   className={``}
-    // ></Input>
-    <Routes>    
-      <Route path="/signin" element={<Login></Login>}></Route>
-      <Route path="/signup" element={<Signup></Signup>}></Route>
-    </Routes>
+    <Router>
+      <div className="App">
+        <Routes>
+          {publicRoutes.map((route, index) => {
+            const Page = route.component;
+            let Layout = HomePage; //default layout
+            if (route.layout) {
+              Layout = route.layout;
+            } else if (route.layout === null) {
+              Layout = Fragment;
+            }
+            return (
+              <Route
+                key={index}
+                path={route.path}
+                element={
+                  <Layout>
+                    <Page></Page>
+                  </Layout>
+                }
+              ></Route>
+            );
+          })}
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

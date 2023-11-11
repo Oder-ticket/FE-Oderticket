@@ -6,14 +6,12 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import confirm from "antd/es/modal/confirm";
 import { Link } from "react-router-dom";
 import { special, uppercase } from "../../lib/components/Validation";
-
 function Login() {
   const [status, setStatus] = useState(false);
   const [form] = Form.useForm();
   const onFinish = async (values) => {
     console.log(values);
   };
-
   const onFinishFailed = (errorInfo) => {
     const element = document.querySelector(
       `[name="${errorInfo.errorFields[0].name[0]}"]`
@@ -27,7 +25,6 @@ function Login() {
     const element = document.querySelector("#username");
     element.focus();
   }, []);
-
   return (
     <LayoutAuthentication>
       <Form
@@ -36,21 +33,19 @@ function Login() {
         onFinish={onFinish}
         name="basic"
         initialValues={{ remember: true }}
-        className={`border-solid border-black border-[2px] rounded-md h-[500px] p-6 w-[300px]`}
+        className={`bg-transparent rounded-md h-[500px] p-6 w-[440px]`}
       >
-        <h1 className="font-bold text-center text-[50px]">Login</h1>
+        <h1 className="font-bold text-center text-[40px]">Login</h1>
         <Form.Item
           hasFeedback={status}
           validateStatus={status ? "error" : ""} // Set the validation status to 'success'
           // Display a success message
           name="username"
-          className=" "
           rules={[
             { required: true, message: "Không được để trống!" },
             { max: 30, message: "Ít hơn 30 từ" },
             { min: 5, message: "Nhiều hơn 5 từ" },
             { whitespace: true, message: "Không được có khoảng trắng" },
-            { enum: ["@"], message: "Có ký tự đặc biệt @" },
           ]}
         >
           <Input
@@ -59,8 +54,8 @@ function Login() {
             onChange={onGenderChange}
             placeholder="Tên đăng nhập"
             prefix={<UserOutlined />}
-            className=""
             type="text"
+            className="h-[40px]"
           ></Input>
         </Form.Item>
         <Form.Item
@@ -78,6 +73,7 @@ function Login() {
             placeholder="Mật khẩu"
             prefix={<LockOutlined />}
             type="password"
+            className="h-[40px]"
           ></Input>
         </Form.Item>
         <Form.Item>
@@ -86,9 +82,9 @@ function Login() {
               <h6 className="text-[10px]">Nhớ mật khẩu</h6>
             </Checkbox>
           </Form.Item>
-          <a href="" className=" ml-[50px] text-[10px] text-blue-700">
+          <Link className="ml-[50px] text-[10px] text-blue-700">
             Quên mật khẩu
-          </a>
+          </Link>
         </Form.Item>
         <Form.Item>
           <Button htmlType="submit" className="bg-black" type="primary" block>
@@ -103,5 +99,4 @@ function Login() {
     </LayoutAuthentication>
   );
 }
-
 export default Login;
