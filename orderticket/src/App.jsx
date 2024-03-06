@@ -1,7 +1,7 @@
 import "./App.css";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import { publicRoutes } from "./routes";
-import HomePage from "./authentication/hompage/HomePage";
+import HomePage from "./authentication/hompage/index";
 import { Fragment } from "react";
 function App() {
   return (

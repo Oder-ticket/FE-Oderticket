@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from "react";
 import VauleSegmented from "./VauleSegmented";
 import ListFilm from "./ListFilm";
-const images = [
-  "https://i.ytimg.com/vi/4fC4qS7D178/maxresdefault.jpg",
-  "https://i.ytimg.com/vi/Wkrv0qCqrVw/maxresdefault.jpg",
-  "https://cdn.tgdd.vn/Files/2021/12/14/1404441/tong-hop-cac-tvc-quang-cao-vinamilk-vui-nhon-sang-tao-202112142208114986.jpg",
-  "https://cdn.tgdd.vn/Files/2021/12/14/1404441/tong-hop-cac-tvc-quang-cao-vinamilk-vui-nhon-sang-tao-202112142208114986.jpg",
-  "https://cdn.tgdd.vn/Files/2021/12/14/1404441/tong-hop-cac-tvc-quang-cao-vinamilk-vui-nhon-sang-tao-202112142208114986.jpg",
-  "https://cdn.tgdd.vn/Files/2021/12/14/1404441/tong-hop-cac-tvc-quang-cao-vinamilk-vui-nhon-sang-tao-202112142208114986.jpg",
-  "https://cdn.tgdd.vn/Files/2021/12/14/1404441/tong-hop-cac-tvc-quang-cao-vinamilk-vui-nhon-sang-tao-202112142208114986.jpg",
-  "https://cdn.tgdd.vn/Files/2021/12/14/1404441/tong-hop-cac-tvc-quang-cao-vinamilk-vui-nhon-sang-tao-202112142208114986.jpg",
-  "https://cdn.tgdd.vn/Files/2021/12/14/1404441/tong-hop-cac-tvc-quang-cao-vinamilk-vui-nhon-sang-tao-202112142208114986.jpg",
-];
+import { useStateContext } from "../../context/StateContextProvider";
+import { Carousel } from "antd";
+
 const Content = () => {
+  const { phim, setPhim, getPhim } = useStateContext();
   const [firlm, setFilm] = useState("phimdangchieu");
   const onHandleChange = (value) => {
     setFilm(value);
   };
-  useEffect(() => {});
+  useEffect(() => {
+    getPhim();
+  }, []);
   return (
     <div className="h-full w-full ">
       <div className="border-solid rotate-[125deg] relative border-[1px] border-[black]"></div>
@@ -32,7 +27,7 @@ const Content = () => {
       <div className="mt-[80px] w-full flex justify-center">
         <ListFilm onHandleChange={onHandleChange}></ListFilm>
       </div>
-      <VauleSegmented value={firlm}></VauleSegmented>
+      <VauleSegmented value={firlm} listphim={phim}></VauleSegmented>
       <h1 className="text-center pt-[48px]">Event</h1>
     </div>
   );

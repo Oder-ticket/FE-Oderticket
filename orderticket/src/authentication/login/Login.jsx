@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import LayoutAuthentication from "../../lib/layout/layout.authentication";
 import clsx from "clsx";
 import { Button, Checkbox, Form, Input } from "antd";
@@ -6,20 +6,29 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import confirm from "antd/es/modal/confirm";
 import { Link } from "react-router-dom";
 import { special, uppercase } from "../../lib/components/Validation";
+import { useStateContext } from "../../context/StateContextProvider";
 function Login() {
+  const { checkUser } = useStateContext();
   const [status, setStatus] = useState(false);
+  const [user, setUser] = useState("");
+  const [password, setPassword] = useState("");
   const [form] = Form.useForm();
-  const onFinish = async (values) => {
-    console.log(values);
-  };
+  const onFinish = async (values) => {};
   const onFinishFailed = (errorInfo) => {
     const element = document.querySelector(
       `[name="${errorInfo.errorFields[0].name[0]}"]`
     );
     element.focus();
+    alert("Nhập không đúng quy tắc");
   };
-  const onGenderChange = (value) => {
+  const onGenderChange = (e) => {
     setStatus(false);
+    setUser(e.target.value);
+    console.log(user);
+  };
+  const onchanePassword = (e) => {
+    setPassword(e.target.value);
+    console.log(password);
   };
   useEffect(() => {
     const element = document.querySelector("#username");
@@ -29,11 +38,15 @@ function Login() {
     <LayoutAuthentication>
       <Form
         onFinishFailed={onFinishFailed}
+        onFinish={() => {
+          checkUser(user, password);
+        }}
         form={form}
-        onFinish={onFinish}
         name="basic"
         initialValues={{ remember: true }}
-        className={`bg-transparent rounded-md h-[500px] p-6 w-[440px]`}
+        className={`${
+          localStorage.getItem("user") ? "hidden" : ""
+        } bg-transparent rounded-md h-[500px] p-6 w-[440px]`}
       >
         <h1 className="font-bold text-center text-[40px]">Login</h1>
         <Form.Item
@@ -63,12 +76,12 @@ function Login() {
           name="password"
           rules={[
             { required: true, message: "Không được để trống!" },
-            { max: 30, message: "Ít hơn 30 từ" },
             { min: 5, message: "Nhiều hơn 5 từ" },
             { whitespace: true, message: "Không được có khoảng trắng" },
           ]}
         >
           <Input
+            onChange={onchanePassword}
             name="password"
             placeholder="Mật khẩu"
             prefix={<LockOutlined />}

@@ -8,6 +8,7 @@ import {
   EyeIcon,
   PlusCircleIcon,
 } from "@heroicons/react/24/solid";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 export const itemsMenu = [
   {
@@ -19,35 +20,30 @@ export const itemsMenu = [
     icon: <HomeIcon className="w-[1em] h-[1em]"></HomeIcon>,
   },
   {
-    label: <Link to={"/signin"}>Đăng nhập</Link>,
-    icon: <ArrowRightOnRectangleIcon className="w-[1em] h-[1em]" alt="" />,
+    title: "dangnhap",
+    label: (
+      <Link className={``} to={"/signin"}>
+        Đăng nhập
+      </Link>
+    ),
+    icon: <ArrowRightOnRectangleIcon className={`w-[1em] h-[1em]`} alt="" />,
   },
   {
     label: <Link to={"/pagefilm"}>Xem phim</Link>,
     icon: <ArrowRightOnRectangleIcon className="w-[1em] h-[1em]" alt="" />,
   },
   {
-    label: "Xem vé phim",
-    icon: <EyeIcon className="w-[1em] h-[1em]" EyeIcon />,
-    children: [
-      {
-        label: "2D",
-      },
-      {
-        label: "3D",
-      },
-    ],
-  },
-  {
+    title: "dangnhap",
     label: <Link to={"/signup"}>Đăng ký</Link>,
     icon: <PlusCircleIcon className="w-[1em] h-[1em]" PlusCircleIcon />,
   },
   {
-    label: "Quản lý vé",
+    label: <Link to={"/quanlyve"}>Quản lý vé</Link>,
     icon: <TicketIcon className="w-[1em] h-[1em]" />,
   },
   {
-    label: "Đăng xuất",
+    title: "dangxuat",
+    label: <h1>Đăng xuất</h1>,
     icon: (
       <ArrowLeftOnRectangleIcon className="w-[1em] h-[1em]"></ArrowLeftOnRectangleIcon>
     ),

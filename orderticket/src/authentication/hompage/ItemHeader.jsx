@@ -2,18 +2,18 @@ import { Input, Menu } from "antd";
 import React from "react";
 import { itemsMenu } from "../../lib/utils/data";
 import { SearchOutlined } from "@ant-design/icons";
+import { useStateContext } from "../../context/StateContextProvider";
 export const SearchHeader = () => {
-  return (
-    <Input
-      prefix={<SearchOutlined></SearchOutlined>}
-      className="w-[272px] h-[24px]"
-      placeholder="Tìm tên phim"
-    ></Input>
-  );
+  return <div></div>;
 };
 export const Navigation = () => {
+  const { theme } = useStateContext();
   return (
-    <Menu className=" w-[600px]" mode="horizontal">
+    <Menu
+      theme={`${theme ? "dark" : "light"}`}
+      className=" w-[600px]"
+      mode="horizontal"
+    >
       {itemsMenu.map((items, index) => {
         return (
           <Menu.Item className="font-bold" icon={items.icon} key={index}>

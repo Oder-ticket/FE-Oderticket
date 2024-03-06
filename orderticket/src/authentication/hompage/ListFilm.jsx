@@ -3,7 +3,7 @@ import React from "react";
 const ListFilm = ({ onHandleChange }) => {
   return (
     <Segmented
-      className="mt-[100px]"
+      className="mb-[80px]"
       onChange={onHandleChange}
       options={[
         {
@@ -23,7 +23,7 @@ const ListFilm = ({ onHandleChange }) => {
               className="flex justify-center h-[64px] items-center w-[200px]"
               style={{ padding: 4 }}
             >
-              <div className="ffont-bold text-[24px]">Phim sắp chiếu</div>
+              <div className="font-bold text-[24px]">Phim sắp chiếu</div>
             </div>
           ),
           value: "phimsapchieu",

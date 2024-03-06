@@ -17,7 +17,7 @@ export const spaceLeft = (value) => {
   return false;
 };
 export const confimPassword = (value, form) => {
-  if (value && value === form.getFieldValue("passwordSignup")) return true;
+  if (value && value === form) return true;
   return false;
 };
 export const structureMail = (value) => {

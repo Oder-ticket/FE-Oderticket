@@ -12,11 +12,18 @@ import {
   structureMail,
   uppercase,
 } from "../../lib/components/Validation";
+import { useStateContext } from "../../context/StateContextProvider";
 function Signup() {
   const [status, setStatus] = useState(false);
+  const [user, setUser] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [email, setEmail] = useState(null);
   const [form] = Form.useForm();
+  const { registerUser } = useStateContext();
   const onFinish = (values) => {
     setStatus(false);
+
+    registerUser(user, password, email);
   };
   const onFinishFailed = (errorInfo) => {
     const element = document.querySelector(
@@ -69,6 +76,10 @@ function Signup() {
               id="emailsignup"
               name="emailsignup"
               placeholder="Email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+                console.log(email);
+              }}
               prefix={<UserOutlined />}
               className=""
               type="text"
@@ -94,8 +105,8 @@ function Signup() {
                     return Promise.reject("Có khoảng trắng");
                   if (uppercase(value))
                     return Promise.reject("Không được viết hoa");
-                  if (!special(value))
-                    return Promise.reject("Phải có ký tự đặt biệt");
+                  // if (!special(value))
+                  //   return Promise.reject("Phải có ký tự đặt biệt");
                   return Promise.resolve();
                 },
               },
@@ -103,6 +114,10 @@ function Signup() {
           >
             <Input
               id="usernamesignup"
+              onChange={(e) => {
+                setUser(e.target.value);
+                console.log(user);
+              }}
               name="usernamesignup"
               placeholder="Tên đăng nhập"
               prefix={<UserOutlined />}
@@ -115,6 +130,10 @@ function Signup() {
             validateStatus={status ? "error" : ""}
             className=""
             name="passwordsignup"
+            onChange={(e) => {
+              setPassword(e.target.value);
+              console.log(password);
+            }}
             rules={[
               { required: true, message: "Không được để trống" },
               { max: 30, message: "Ít hơn 30 từ" },
@@ -164,7 +183,8 @@ function Signup() {
                     return Promise.reject("Khoảng trắng");
                   if (spaceLeft(value))
                     return Promise.reject("Khoảng trắng đầu hàng");
-                  if (!confimPassword(value, form))
+
+                  if (!confimPassword(value, password))
                     return Promise.reject("Không trùng mật khẩu");
                   return Promise.resolve();
                 },
@@ -197,5 +217,4 @@ function Signup() {
     </LayoutAuthentication>
   );
 }
-
 export default Signup;

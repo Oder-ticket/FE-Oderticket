@@ -4,7 +4,7 @@
 .ant-carousel {
   border-radius: 8px;
   background-color: #1f1f1f;
-  border: 16cap;
+  border: 16px;
   padding: 16px;
 }
 .ant-carousel .slick-slide {
@@ -14,6 +14,10 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Thêm bóng đổ tùy ý */
   text-align: center;
 }
-.backgroundimage-content {
-  background-image: url("https://previews.123rf.com/images/krekdm/krekdm1607/krekdm160700081/59591878-seamless-cinema-pattern-can-be-used-for-wallpaper-website-background-wrapping-paper-cinema-vector.jpg");
+
+.ant-switch-checked .ant-switch-handle::before {
+  background-color: white; /* Thay đổi màu ở đây */
+}
+.ant-switch-handle::before {
+  background-color: black; /* Thay đổi màu ở đây */
 }
